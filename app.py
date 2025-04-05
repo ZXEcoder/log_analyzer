@@ -1,132 +1,77 @@
 import os
+# ensure the key is set in this process
+os.environ.setdefault("AGENTOPS_API_KEY", "08ffcdfd-c544-438b-ada3-ecb4fb8eb50a")
 
-from crewai import Agent, Task, Crew, Process
-from crewai_tools import SerperDevTool, DirectoryReadTool, FileReadTool
-from langchain_openai import AzureChatOpenAI
+import agentops
+# you can still add tags here if you like
+agentops.init(default_tags=["crewai"])
 
-from tools.report_sender_tool import SendEmailTool
+import os
+from crewai import LLM, Agent, Task, Crew, Process
+from crewai_tools import DirectoryReadTool, FileReadTool
 
-# os.environ["OPENAI_API_BASE"] = 'secret'
-# os.environ["OPENAI_MODEL_NAME"] = 'secret'
-# os.environ["OPENAI_API_KEY"] = "secret"
-# os.environ["OPENAI_API_KEY"] = "secret"
-# os.environ["OPENAI_MODEL_NAME"] = 'secret'
-os.environ["OPENAI_API_VERSION"] = 'secret'
+# 1) Configure your Gemini key in your environment:
+#    export GEMINI_API_KEY="…"
 
-os.environ["SERPER_API_KEY"] = "secret"
-
-os.environ["AZURE_OPENAI_VERSION"] = "secret"
-os.environ["AZURE_OPENAI_DEPLOYMENT"] = "secret"
-os.environ[
-    "AZURE_OPENAI_ENDPOINT"] = "secret"
-os.environ["AZURE_OPENAI_KEY"] = "secret"
-
-azure_llm = AzureChatOpenAI(
-    azure_endpoint=os.environ.get("AZURE_OPENAI_ENDPOINT"),
-    api_key=os.environ.get("AZURE_OPENAI_KEY"),
-    api_version="secret"
+# 2) Instantiate the CrewAI LLM for Gemini
+gemini_llm = LLM(
+    api_key="AIzaSyBpxYPNK5t_Qg6iIsymJoAD5oL6fOgQxTE",
+    model="gemini/gemini-2.0-flash"   # or "gemini/gemini-pro", "gemini/gemini-1.5-flash", etc.
 )
 
+# 3) Build your agents exactly as before, but pass `gemini_llm` in:
 directory_reader = DirectoryReadTool()
-serper_tool = SerperDevTool()
-file_read_tool = FileReadTool()
-send_email_tool = SendEmailTool()
+file_read_tool   = FileReadTool()
 
-latest_founder_agent = Agent(
+latest_file_agent = Agent(
     role="File Reader Agent",
-    goal="Read file names in a directory and find the newest files by date."
-         " Try to analyze name patterns to find similar files and latest files. Date is in file name like:"
-         "import_internet_speed_04032024: import_internet_speed - mame pf job, 04032024 - date in dd:mm:yyyy",
-    backstory=(
-        "You are a meticulous file reader with a keen eye for detail. "
-        "Your job is to identify the most recent files in a given directory."
-    ),
+    goal="Find the newest files in a directory by parsing dates in their filenames.",
+    backstory="You’re a detail‑oriented file reader.",
     memory=True,
     tools=[directory_reader],
     allow_delegation=False,
     verbose=True,
-    llm=azure_llm
+    llm=gemini_llm
 )
 
 log_analyzer_agent = Agent(
     role="Senior Log Analysis Specialist",
-    goal="To ensure the integrity, performance, and reliability of IT systems by meticulously analyzing "
-         "and interpreting system logs, identifying issues, and providing actionable insights.",
-    backstory=(
-        "You are expert with over 15 years of experience in the IT industry, "
-        "is a seasoned expert in log analysis and system monitoring."
-        "Holding a Master's degree in Computer Science, "
-        "Renowned for the ability to quickly decipher complex logs,"
-        "Known for a methodical approach and sharp analytical mind, you are dedicated to ensuring"
-        "seamless operations and upholding the highest standards of system reliability."
-    ),
+    goal="Analyze system logs and surface errors, timings, and exceptions.",
+    backstory="15+ years in IT, master’s in CS, log‑analysis guru.",
     memory=True,
     tools=[file_read_tool],
     allow_delegation=False,
     verbose=True,
-    llm=azure_llm
-)
-
-email_agent = Agent(
-    llm=azure_llm,
-    role="Secretary for emails",
-    goal="Formulate a email body with report data. ONLY BODY IS REQUIRED",
-    backstory=(
-        "You are the master in writing emails with reports from provided data"
-    ),
-    memory=True,
-    verbose=True,
-    tools=[send_email_tool],
-    allow_delegation=True
+    llm=gemini_llm
 )
 
 find_latest_task = Task(
-    llm=azure_llm,
-    agent=latest_founder_agent,
-    description=(
-        "Read the file names in {logs_directory} and find the newest files by date for each type of job or system part."
-        "Provide a list of these files."
-    ),
-    expected_output='Array of file paths',
+    description="Read file names in {logs_directory} and return the newest for each job.",
+    expected_output="Array of file paths",
+    agent=latest_file_agent,
     tools=[directory_reader]
 )
 
 analyze_logs_task = Task(
-    llm=azure_llm,
-    agent=log_analyzer_agent,
     description=(
-        "Analyze logs from provided from context to formulate table about current state of system."
+        "From the files found, produce markdown tables:\n"
+        "- Import jobs: coverage type, table name, environment, time spent\n"
+        "- Microservices: error, exception type, exception message"
     ),
-    expected_output=(
-        'Make separate table for each import jobs amd microservices'
-        'For import jobs: type of coverage, name of table, environment, time spent for operation'
-        'For microservice: error, exception type, exception message'
-    ),
+    expected_output="Markdown report",
     output_file="./report.md",
+    agent=log_analyzer_agent,
     context=[find_latest_task],
     tools=[file_read_tool],
     verbose=True
 )
 
-send_report_task = Task(
-    llm=azure_llm,
-    agent=email_agent,
-    description=(
-        "This task provides necessary tools and agent for creating report from analyzed logs"
-    ),
-    expected_output=(
-        'Data is successfully send to team email'
-    ),
-    context=[analyze_logs_task],
-    tools=[send_email_tool],
-)
-
 crew = Crew(
-    agents=[log_analyzer_agent],
-    tasks=[find_latest_task, analyze_logs_task, send_report_task],
+    agents=[latest_file_agent, log_analyzer_agent],
+    tasks=[find_latest_task, analyze_logs_task],
     process=Process.sequential
 )
 
-inputs = {'logs_directory': './logs'}
-result = crew.kickoff(inputs)
-print(result)
+if __name__ == "__main__":
+    result = crew.kickoff({"logs_directory": "./logs"})
+    print(result)
