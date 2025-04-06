@@ -1,69 +1,62 @@
 ```
-# System Log Analysis Report
+## System Log Analysis Report
 
-## Overview
+### Overview
 
-This report summarizes the analysis of the system logs available. The primary goal is to identify key observations, potential security events, and any traffic patterns that can be plotted over time. Due to file access limitations, the analysis is based solely on the contents of `./logs/syslog.log`.
+This report summarizes the analysis of the `syslog.log` file. The analysis focuses on identifying log patterns, potential security events, and data suitable for plotting over time.
 
-## Date and Time Format
+### Log Format
 
-The date and time format observed in `./logs/syslog.log` is: `Sun Apr  6 01:20:27 2025`. This represents the day of the week, month, day of the month, time (HH:MM:SS), and year.
+The log entries follow the format: `Day Mon DD HH:MM:SS YYYY EventID Source Type Category Message`.  Example: `Sun Apr  6 04:22:43 2025 1796 Microsoft-Windows-TPM-WMI 1 0 The Secure Boot update failed to update a Secure Boot variable with error -2147020471.`
 
-## Key Observations
+### Key Observations and Potential Security Events
 
-*   **Kernel Power Events:** Numerous events related to Kernel Power management are logged, often with Event IDs 566, 507, 506, 172, 105, 700 and 701. These indicate power-related activities and possible settings changes.
-*   **Service Control Manager Events:** Frequent changes in the start type of the "Background Intelligent Transfer Service" (BITS) are observed (Event ID 7040). This could indicate issues with the service or intentional configuration changes.
-*   **TPM Errors:** Multiple entries indicate failures of the Trusted Platform Module (TPM) hardware (Event ID 17). These errors might suggest hardware issues or configuration problems with TPM.
-*   **Windows Update Activity:** Installation and download events related to Windows Updates (Microsoft Defender Antivirus and other applications) are logged, which helps track update status.
-*   **DNS Client Errors:** Name resolution timeouts for various domains (e.g., assets.msn.com, t-ring-fdv2.msedge.net) are reported (Event ID 1014), suggesting potential DNS server issues or network connectivity problems.
-*   **Time Service Issues:** NtpClient encounters DNS resolution errors when attempting to synchronize time with 'time.windows.com' (Event ID 134), indicating possible time synchronization problems. The VMICTimeProvider also reports environment incompatibility.
-*   **Bluetooth Errors:** There are errors reported when Windows cannot store Bluetooth authentication codes (link keys) (Event ID 18), which could indicate a problem with the Bluetooth adapter or driver.
-*   **DCOM Errors:** DCOM errors with event ID 10010 and 10016 which means the system is not able to find a description for certain components.
+*   **TPM Errors:** Multiple entries indicate failures in the Trusted Platform Module (TPM) hardware to execute commands. These errors should be investigated further, as they could indicate hardware issues or potential security compromises.
+    *   Example Log: `Sat Apr  5 23:21:28 2025 17 TPM 4 0 The Trusted Platform Module (TPM) hardware failed to execute a TPM command.`
+*   **Secure Boot Update Failures:** Errors reported for secure boot update, can indicate a security vulnerability.
+    *   Example Log: `Sun Apr 6 04:22:43 2025 1796 Microsoft-Windows-TPM-WMI 1 0 The Secure Boot update failed to update a Secure Boot variable with error -2147020471.`
+*   **Possible CVE Detection:** Several entries report a possible detection of CVE, indicating attempted exploitation of a known vulnerability. This requires immediate investigation.
+    *   Example Log: `Sat Apr  5 14:27:37 2025 1 Microsoft-Windows-Kernel-General 4 5 Possible detection of CVE: 2025-04-05T08:57:37.3274548Z`
+*   **BTHUSB Errors:** Several logs shows `Windows cannot store Bluetooth authentication codes (link keys) on the local adapter. Bluetooth keyboards might not work in the system BIOS during startup.` This could indicate problems with bluetooth devices.
+    *   Example Log: `Sat Apr  5 23:19:41 2025 18 BTHUSB 4 0 Windows cannot store Bluetooth authentication codes (link keys) on the local adapter.`
+*   **Service Control Manager Events:** Frequent changes in the start type of the Background Intelligent Transfer Service (BITS) service might suggest unusual activity or misconfiguration.
+    *   Example Log: `Sun Apr 6 04:22:32 2025 7040 Service Control Manager 4 0 The start type of the Background Intelligent Transfer Service service was changed from auto start to demand start.`
+*   **Time Service Errors:** Occasional errors related to the time service (NtpClient) failing to resolve 'time.windows.com' can cause time synchronization issues.
+    *   Example Log: `Sat Apr  5 23:19:41 2025 134 Microsoft-Windows-Time-Service 2 0 NtpClient was unable to set a manual peer to use as a time source because of DNS resolution error on 'time.windows.com,0x9'.`
+*   **DNS Client Errors:** Timeout in DNS resolution for some URLs.
+    *   Example Log: `Sat Apr 5 23:19:59 2025 1014 Microsoft-Windows-DNS-Client 2 1014 Name resolution for the name assets.msn.com timed out after none of the configured DNS servers responded.`
+*   **TCP/IP Address Conflict:**
+    *   Example Log: `Sat Apr 5 13:31:33 2025 4199 Tcpip 1 0 The system detected an address conflict for IP address 2409:40c2:101c:9494:ffcb:92ec:811c:afbd with the system having network hardware address 02-50-F3-00-08-04.`
+*   **Hyper-V-VmSwitch Events:** Several logs related to Hyper-V Virtual Machine Switch events might indicate virtual machine-related activity or issues.
+    *   Example Log: `Sun Apr 6 03:36:27 2025 291 Microsoft-Windows-Hyper-V-VmSwitch 4 0 RSC offload modified for NIC 81EE5F69-CBC4-46E7-8D43-3A892CCE646D--D7409CD8-2497-4C1C-8E75-1722341DBB87 (Friendly Name: ) Previous IPv4: 1, Current IPv4: 0, Previous IPv6: 1, Current IPv6: 0. Reason: 6`
 
-## Potential Security Events
+### Time-Based Trends
 
-*   **CVE Detection:** Several entries indicate a "Possible detection of CVE" along with CVE IDs and timestamps. These are serious events that require immediate investigation as they signal potential exploitation attempts. Examples are "Possible detection of CVE: 2025-04-05T19:05:14.7807041Z" and "Possible detection of CVE: 2025-04-05T08:57:37.3274548Z".
-*   **Secure Boot Update Failure:** An event indicates a Secure Boot update failure (Event ID 1796), which could compromise system security.
-*   **Address Conflict:** An IP address conflict was detected for an IPv6 address.
+| Timestamp         | Value | Description                                                     |
+|-------------------|-------|-----------------------------------------------------------------|
+| Sat Apr  5 09:00 2025 | 20    | Number of 'Kernel-Power' events between 09:00:00 and 09:59:59 |
+| Sat Apr  5 10:00 2025 | 13    | Number of 'Kernel-Power' events between 10:00:00 and 10:59:59 |
+| Sat Apr  5 11:00 2025 | 16    | Number of 'Kernel-Power' events between 11:00:00 and 11:59:59 |
+| Sat Apr  5 12:00 2025 | 9     | Number of 'Kernel-Power' events between 12:00:00 and 12:59:59 |
+| Sat Apr  5 13:00 2025 | 13    | Number of 'Kernel-Power' events between 13:00:00 and 13:59:59 |
+| Sat Apr  5 14:00 2025 | 22    | Number of 'Kernel-Power' events between 14:00:00 and 14:59:59 |
+| Sat Apr  5 16:00 2025 | 9    | Number of 'Kernel-Power' events between 16:00:00 and 16:59:59 |
+| Sat Apr  5 17:00 2025 | 8     | Number of 'Kernel-Power' events between 17:00:00 and 17:59:59 |
+| Sat Apr  5 18:00 2025 | 12    | Number of 'Kernel-Power' events between 18:00:00 and 18:59:59 |
+| Sat Apr  5 19:00 2025 | 11    | Number of 'Kernel-Power' events between 19:00:00 and 19:59:59 |
+| Sat Apr  5 23:00 2025 | 14    | Number of 'Kernel-Power' events between 23:00:00 and 23:59:59 |
+| Sun Apr  6 00:00 2025 | 12    | Number of 'Kernel-Power' events between 00:00:00 and 00:59:59 |
+| Sun Apr  6 03:00 2025 | 51    | Number of 'Hyper-V-VmSwitch' events between 03:00:00 and 03:59:59 |
+| Sun Apr  6 04:00 2025 | 13    | Number of 'Kernel-Power' events between 04:00:00 and 04:59:59 |
 
-## Plottable Data and Traffic Patterns
+*Note: This data is also saved in `./logs/system_log_trends.csv`*
 
-Based on the available data, the following data points can be extracted and plotted over time:
+### Recommendations
 
-| timestamp           | value | description                                                                                   |
-| :------------------ | :---- | :-------------------------------------------------------------------------------------------- |
-| Sun Apr 6 01:20:27 2025 | 16    | Microsoft-Windows-Kernel-General event                                                        |
-| Sun Apr 6 00:35:16 2025 | 566   | Microsoft-Windows-Kernel-Power event                                                          |
-| Sun Apr 6 00:35:16 2025 | 507   | Microsoft-Windows-Kernel-Power event                                                          |
-| Sun Apr 6 00:35:15 2025 | 701   | Win32k event                                                                                  |
-| Sun Apr 6 00:35:15 2025 | 701   | Win32k event                                                                                  |
-| Sun Apr 6 00:35:14 2025 | 1     | Microsoft-Windows-Kernel-General event (CVE Detection)                                        |
-| Sun Apr 6 00:35:14 2025 | 24    | Microsoft-Windows-Kernel-General event                                                        |
-| Sun Apr 6 00:35:14 2025 | 566   | Microsoft-Windows-Kernel-Power event                                                          |
-| Sun Apr 6 00:35:14 2025 | 506   | Microsoft-Windows-Kernel-Power event                                                          |
-| Sun Apr 6 00:35:14 2025 | 566   | Microsoft-Windows-Kernel-Power event                                                          |
-| Sun Apr 6 00:35:14 2025 | 700   | Win32k event                                                                                  |
-| Sun Apr 6 00:35:14 2025 | 700   | Win32k event                                                                                  |
-| Sun Apr 6 00:23:32 2025 | 7040  | Service Control Manager event (BITS start type change)                                       |
-| Sat Apr 5 23:19:59 2025 | 1014  | Microsoft-Windows-DNS-Client event (DNS timeout)                                             |
-| Sat Apr 5 13:31:33 2025 | 4199  | Tcpip event (IP address conflict)                                                            |
-| Sat Apr 5 16:22:43 2025 | 1796  | Microsoft-Windows-TPM-WMI event (Secure Boot update failure)                                  |
-| Sat Apr 5 18:13:30 2025 | 7000  | Service Control Manager event (Windows Camera Frame Server Monitor service failed to start) |
-| Sat Apr 5 18:13:30 2025 | 7009  | Service Control Manager event (Windows Camera Frame Server Monitor service timeout)        |
-| Sat Apr 5 09:50:53 2025 | 10010 | DCOM event                                                                                    |
-| Sat Apr 5 09:50:18 2025 | 10016 | DCOM event                                                                                    |
-| ...                   | ...   | ...                                                                                           |
-
-This data can be used to plot the frequency of different event types over time.  For example, plotting the number of Kernel Power events per hour could reveal patterns in power management activities. Similarly, tracking DNS timeout events can help diagnose network issues. CVE detections should be monitored very closely, and their frequency tracked.
-
-## Recommendations
-
-*   Investigate the "Possible detection of CVE" events immediately. Determine the affected systems and apply necessary patches or mitigations.
-*   Examine the TPM errors and determine if there's a hardware fault or configuration issue.
-*   Monitor the BITS service start type changes to ensure the service is functioning correctly.
-*   Investigate the DNS timeout errors and ensure DNS servers are reachable and functioning correctly.
-*   Address the Bluetooth adapter errors.
-*   Investigate the root cause of the Secure Boot update failure and ensure that Secure Boot is properly configured to protect the system.
-*   Gather data from all logs for a complete analysis.
-
-```
+1.  **Investigate TPM Errors:** Thoroughly investigate the cause of the TPM errors. This could involve checking hardware diagnostics and reviewing security configurations.
+2.  **Monitor Service Control Manager Events:** Keep a close watch on the changes in the BITS service start type. Investigate any unauthorized or unexpected modifications.
+3.  **Address Time Service Errors:** Ensure that the system can reliably resolve and connect to time servers to maintain accurate time synchronization.
+4.  **Review CVE Detection:** Analyze logs related to the detection of CVE to identify potential vulnerabilities.
+5.  **Further Log Aggregation:** Collect logs from other system components.
+6.  **Establish a Baseline:** Identify standard behavior.
+7.  **Implement Log Monitoring and Alerting:** Setup a system for monitoring and generating alerts.

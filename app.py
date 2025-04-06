@@ -1,6 +1,6 @@
 import os
 # ensure the key is set in this process
-os.environ.setdefault("AGENTOPS_API_KEY", "08ffcdfd-c544-438b-ada3-ecb4fb8eb50a")
+os.environ.setdefault("AGENTOPS_API_KEY", "")
 
 import agentops
 # you can still add tags here if you like
@@ -15,7 +15,7 @@ from crewai_tools import DirectoryReadTool, FileReadTool
 
 # 2) Instantiate the CrewAI LLM for Gemini
 gemini_llm = LLM(
-    api_key="AIzaSyBpxYPNK5t_Qg6iIsymJoAD5oL6fOgQxTE",
+    api_key="",
     model="gemini/gemini-2.0-flash"   # or "gemini/gemini-pro", "gemini/gemini-1.5-flash", etc.
 )
 

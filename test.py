@@ -1,30 +1,22 @@
+import pywhatkit as kit
 import os
-from openai import OpenAI
+# 1. List of recipients
+contacts = [
+    "+918849083319"
+]
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
-model_name = "gpt-4o"
+# 2. Read content from README.md (text part only)
+with open(r"E:\loganalyzer\crewaiLogsReport\reports\performance_report.md", "r", encoding="utf-8") as file:
+    content = file.read()
 
-client = OpenAI(
-    base_url=endpoint,
-    api_key=token,
-)
+# Optional: Trim the content if it's too long for WhatsApp (limit to 3000 characters or so)
+max_length = 10000
+message = content[:max_length]
 
-response = client.chat.completions.create(
-    messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "role": "user",
-            "content": "What is the capital of France?",
-        }
-    ],
-    temperature=1.0,
-    top_p=1.0,
-    max_tokens=1000,
-    model=model_name
-)
-
-print(response.choices[0].message.content)
+# 3. Send the message instantly
+for contact in contacts:
+    try:
+        kit.sendwhatmsg_instantly(contact, message, wait_time=10, tab_close=True)
+        print(f"README.md content sent to {contact}")
+    except Exception as e:
+        print(f"Error with {contact}: {e}")

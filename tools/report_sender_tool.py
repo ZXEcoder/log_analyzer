@@ -7,8 +7,8 @@ from crewai_tools import BaseTool
 
 smtp_server = "localhost"
 smtp_port = 1025
-sender_email = "aiisthebest@baza.eto"
-receiver_email = "krasiviemail@gmail.com"
+sender_email = "surajjha21103@gmail.com"
+receiver_email = "miteshmaity280603@gmail.com"
 
 
 class SendEmailTool(BaseTool):

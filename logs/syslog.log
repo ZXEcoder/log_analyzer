@@ -1,4 +1,59 @@
 TimeGenerated	EventID	Source	Type	Category	Message
+Sun Apr  6 04:22:43 2025	1796	Microsoft-Windows-TPM-WMI	1	0	The Secure Boot update failed to update a Secure Boot variable with error -2147020471. For more information, please see https://go.microsoft.com/fwlink/?linkid=2169931
+Sun Apr  6 04:22:32 2025	7040	Service Control Manager	4	0	The start type of the Background Intelligent Transfer Service service was changed from auto start to demand start.
+Sun Apr  6 04:19:43 2025	7040	Service Control Manager	4	0	The start type of the Background Intelligent Transfer Service service was changed from demand start to auto start.
+Sun Apr  6 04:06:14 2025	7040	Service Control Manager	4	0	The start type of the Background Intelligent Transfer Service service was changed from auto start to demand start.
+Sun Apr  6 04:05:59 2025	566	Microsoft-Windows-Kernel-Power	4	268	
+Sun Apr  6 04:05:59 2025	507	Microsoft-Windows-Kernel-Power	4	158	
+Sun Apr  6 04:03:46 2025	566	Microsoft-Windows-Kernel-Power	4	268	
+Sun Apr  6 04:02:44 2025	506	Microsoft-Windows-Kernel-Power	4	157	
+Sun Apr  6 04:02:44 2025	566	Microsoft-Windows-Kernel-Power	4	268	
+Sun Apr  6 04:02:44 2025	507	Microsoft-Windows-Kernel-Power	4	158	
+Sun Apr  6 04:02:43 2025	566	Microsoft-Windows-Kernel-Power	4	268	
+Sun Apr  6 04:02:12 2025	7040	Service Control Manager	4	0	The start type of the Background Intelligent Transfer Service service was changed from demand start to auto start.
+Sun Apr  6 04:01:20 2025	19	Microsoft-Windows-WindowsUpdateClient	4	1	Installation Successful: Windows successfully installed the following update: 9NZKPSTSNW4P-Microsoft.XboxGamingOverlay
+Sun Apr  6 04:01:20 2025	16	Microsoft-Windows-Kernel-General	4	0	
+Sun Apr  6 04:01:19 2025	43	Microsoft-Windows-WindowsUpdateClient	4	1	Installation Started: Windows has started installing the following update: 9NZKPSTSNW4P-Microsoft.XboxGamingOverlay
+Sun Apr  6 04:01:19 2025	16	Microsoft-Windows-Kernel-General	4	0	
+Sun Apr  6 04:01:12 2025	19	Microsoft-Windows-WindowsUpdateClient	4	1	Installation Successful: Windows successfully installed the following update: 9WZDNCRD29V9-MICROSOFT.MICROSOFTOFFICEHUB
+Sun Apr  6 04:01:11 2025	16	Microsoft-Windows-Kernel-General	4	0	
+Sun Apr  6 04:01:11 2025	43	Microsoft-Windows-WindowsUpdateClient	4	1	Installation Started: Windows has started installing the following update: 9WZDNCRD29V9-MICROSOFT.MICROSOFTOFFICEHUB
+Sun Apr  6 04:00:56 2025	19	Microsoft-Windows-WindowsUpdateClient	4	1	Installation Successful: Windows successfully installed the following update: 9WZDNCRFJBMP-MICROSOFT.WINDOWSSTORE
+Sun Apr  6 04:00:55 2025	43	Microsoft-Windows-WindowsUpdateClient	4	1	Installation Started: Windows has started installing the following update: 9WZDNCRFJBMP-MICROSOFT.WINDOWSSTORE
+Sun Apr  6 04:00:55 2025	44	Microsoft-Windows-WindowsUpdateClient	4	1	Windows Update started downloading an update.
+Sun Apr  6 04:00:28 2025	506	Microsoft-Windows-Kernel-Power	4	157	
+Sun Apr  6 04:00:28 2025	566	Microsoft-Windows-Kernel-Power	4	268	
+Sun Apr  6 03:36:27 2025	291	Microsoft-Windows-Hyper-V-VmSwitch	4	0	RSC offload modified for NIC 81EE5F69-CBC4-46E7-8D43-3A892CCE646D--D7409CD8-2497-4C1C-8E75-1722341DBB87 (Friendly Name: ) Previous IPv4: 1, Current IPv4: 0, Previous IPv6: 1, Current IPv6: 0. Reason: 6
+Sun Apr  6 03:36:24 2025	291	Microsoft-Windows-Hyper-V-VmSwitch	4	0	RSC offload modified for NIC 81EE5F69-CBC4-46E7-8D43-3A892CCE646D--D7409CD8-2497-4C1C-8E75-1722341DBB87 (Friendly Name: ) Previous IPv4: 1, Current IPv4: 1, Previous IPv6: 1, Current IPv6: 1. Reason: 6
+Sun Apr  6 03:36:24 2025	102	Microsoft-Windows-Hyper-V-VmSwitch	4	1019	Networking driver in 81EE5F69-CBC4-46E7-8D43-3A892CCE646D is loaded and the protocol version is negotiated to the most recent version (Virtual machine ID 81EE5F69-CBC4-46E7-8D43-3A892CCE646D).
+Sun Apr  6 03:36:23 2025	291	Microsoft-Windows-Hyper-V-VmSwitch	4	0	RSC offload modified for NIC 81EE5F69-CBC4-46E7-8D43-3A892CCE646D--D7409CD8-2497-4C1C-8E75-1722341DBB87 (Friendly Name: ) Previous IPv4: 0, Current IPv4: 1, Previous IPv6: 0, Current IPv6: 1. Reason: 6
+Sun Apr  6 03:36:23 2025	102	Microsoft-Windows-Hyper-V-VmSwitch	4	1019	Networking driver in 81EE5F69-CBC4-46E7-8D43-3A892CCE646D is loaded and the protocol version is negotiated to the most recent version (Virtual machine ID 81EE5F69-CBC4-46E7-8D43-3A892CCE646D).
+Sun Apr  6 03:36:23 2025	232	Microsoft-Windows-Hyper-V-VmSwitch	4	0	NIC 81EE5F69-CBC4-46E7-8D43-3A892CCE646D--D7409CD8-2497-4C1C-8E75-1722341DBB87 (Friendly Name: ) successfully connected to port D7409CD8-2497-4C1C-8E75-1722341DBB87 (Friendly Name: D7409CD8-2497-4C1C-8E75-1722341DBB87) on switch 790E58B4-7939-4434-9358-89AE7DDBE87E(Friendly Name: WSL (Hyper-V firewall)).
+Sun Apr  6 03:36:23 2025	233	Microsoft-Windows-Hyper-V-VmSwitch	4	0	The operation '7' succeeded on nic 81EE5F69-CBC4-46E7-8D43-3A892CCE646D--D7409CD8-2497-4C1C-8E75-1722341DBB87 (Friendly Name: ), Instance Id {00000000-0000-0000-0000-000000000000}.
+Sun Apr  6 03:36:23 2025	291	Microsoft-Windows-Hyper-V-VmSwitch	4	0	RSC offload modified for NIC 81EE5F69-CBC4-46E7-8D43-3A892CCE646D--D7409CD8-2497-4C1C-8E75-1722341DBB87 (Friendly Name: ) Previous IPv4: 0, Current IPv4: 0, Previous IPv6: 0, Current IPv6: 0. Reason: 3
+Sun Apr  6 03:36:23 2025	67	Microsoft-Windows-Hyper-V-VmSwitch	4	0	Port D7409CD8-2497-4C1C-8E75-1722341DBB87 (Friendly Name: D7409CD8-2497-4C1C-8E75-1722341DBB87) successfully created on switch 790E58B4-7939-4434-9358-89AE7DDBE87E (Friendly Name: WSL (Hyper-V firewall)).
+Sun Apr  6 03:36:23 2025	292	Microsoft-Windows-Hyper-V-VmSwitch	4	0	RSC offload modified for Port D7409CD8-2497-4C1C-8E75-1722341DBB87 (Friendly Name: D7409CD8-2497-4C1C-8E75-1722341DBB87) Previous: 0, Current: 1. Reason: 0
+Sun Apr  6 03:36:23 2025	232	Microsoft-Windows-Hyper-V-VmSwitch	4	0	NIC 790E58B4-7939-4434-9358-89AE7DDBE87F (Friendly Name: WSL (Hyper-V firewall)) successfully connected to port 790E58B4-7939-4434-9358-89AE7DDBE87F (Friendly Name: Host Vnic 790E58B4-7939-4434-9358-89AE7DDBE87E) on switch 790E58B4-7939-4434-9358-89AE7DDBE87E(Friendly Name: WSL (Hyper-V firewall)).
+Sun Apr  6 03:36:23 2025	291	Microsoft-Windows-Hyper-V-VmSwitch	4	0	RSC offload modified for NIC 790E58B4-7939-4434-9358-89AE7DDBE87F (Friendly Name: WSL (Hyper-V firewall)) Previous IPv4: 1, Current IPv4: 1, Previous IPv6: 1, Current IPv6: 1. Reason: 6
+Sun Apr  6 03:36:23 2025	291	Microsoft-Windows-Hyper-V-VmSwitch	4	0	RSC offload modified for NIC 790E58B4-7939-4434-9358-89AE7DDBE87F (Friendly Name: WSL (Hyper-V firewall)) Previous IPv4: 0, Current IPv4: 1, Previous IPv6: 0, Current IPv6: 1. Reason: 6
+Sun Apr  6 03:36:23 2025	7	Microsoft-Windows-Hyper-V-VmSwitch	4	1004	Miniport NIC 790E58B4-7939-4434-9358-89AE7DDBE87F (Friendly Name: WSL (Hyper-V firewall)) successfully initialized.
+Sun Apr  6 03:36:23 2025	291	Microsoft-Windows-Hyper-V-VmSwitch	4	0	RSC offload modified for NIC 790E58B4-7939-4434-9358-89AE7DDBE87F (Friendly Name: WSL (Hyper-V firewall)) Previous IPv4: 0, Current IPv4: 0, Previous IPv6: 0, Current IPv6: 0. Reason: 4
+Sun Apr  6 03:36:23 2025	233	Microsoft-Windows-Hyper-V-VmSwitch	4	0	The operation '7' succeeded on nic 790E58B4-7939-4434-9358-89AE7DDBE87F (Friendly Name: WSL (Hyper-V firewall)), Instance Id {00000000-0000-0000-0000-000000000000}.
+Sun Apr  6 03:36:23 2025	291	Microsoft-Windows-Hyper-V-VmSwitch	4	0	RSC offload modified for NIC 790E58B4-7939-4434-9358-89AE7DDBE87F (Friendly Name: WSL (Hyper-V firewall)) Previous IPv4: 0, Current IPv4: 0, Previous IPv6: 0, Current IPv6: 0. Reason: 3
+Sun Apr  6 03:36:23 2025	264	Microsoft-Windows-Hyper-V-VmSwitch	4	0	Internal or External Port 790E58B4-7939-4434-9358-89AE7DDBE87F (Friendly Name: Host Vnic 790E58B4-7939-4434-9358-89AE7DDBE87E) successfully created on switch 790E58B4-7939-4434-9358-89AE7DDBE87E (Friendly Name: WSL (Hyper-V firewall)).
+Sun Apr  6 03:36:23 2025	292	Microsoft-Windows-Hyper-V-VmSwitch	4	0	RSC offload modified for Port 790E58B4-7939-4434-9358-89AE7DDBE87F (Friendly Name: Host Vnic 790E58B4-7939-4434-9358-89AE7DDBE87E) Previous: 0, Current: 1. Reason: 0
+Sun Apr  6 03:36:23 2025	7036	VfpExt	4	0	The  service entered the Filter restart complete state.
+Sun Apr  6 03:36:23 2025	7036	VfpExt	4	0	The  service entered the Filter restart start state.
+Sun Apr  6 03:36:23 2025	7036	VfpExt	4	0	The  service entered the Filter attach complete state.
+Sun Apr  6 03:36:23 2025	7036	VfpExt	4	0	The  service entered the Filter attach start state.
+Sun Apr  6 03:36:23 2025	9	Microsoft-Windows-Hyper-V-VmSwitch	4	1005	Switch 790E58B4-7939-4434-9358-89AE7DDBE87E (Friendly Name: WSL (Hyper-V firewall)) successfully initialized.
+Sun Apr  6 03:36:23 2025	232	Microsoft-Windows-Hyper-V-VmSwitch	4	0	NIC 790E58B4-7939-4434-9358-89AE7DDBE87E (Friendly Name: WSL (Hyper-V firewall)) successfully connected to port 790E58B4-7939-4434-9358-89AE7DDBE87E (Friendly Name: WSL (Hyper-V firewall)) on switch 790E58B4-7939-4434-9358-89AE7DDBE87E(Friendly Name: WSL (Hyper-V firewall)).
+Sun Apr  6 03:36:23 2025	233	Microsoft-Windows-Hyper-V-VmSwitch	4	0	The operation '7' succeeded on nic 790E58B4-7939-4434-9358-89AE7DDBE87E (Friendly Name: WSL (Hyper-V firewall)), Instance Id {00000000-0000-0000-0000-000000000000}.
+Sun Apr  6 03:36:23 2025	291	Microsoft-Windows-Hyper-V-VmSwitch	4	0	RSC offload modified for NIC 790E58B4-7939-4434-9358-89AE7DDBE87E (Friendly Name: WSL (Hyper-V firewall)) Previous IPv4: 0, Current IPv4: 0, Previous IPv6: 0, Current IPv6: 0. Reason: 3
+Sun Apr  6 03:36:23 2025	67	Microsoft-Windows-Hyper-V-VmSwitch	4	0	Port 790E58B4-7939-4434-9358-89AE7DDBE87E (Friendly Name: WSL (Hyper-V firewall)) successfully created on switch 790E58B4-7939-4434-9358-89AE7DDBE87E (Friendly Name: WSL (Hyper-V firewall)).
+Sun Apr  6 03:36:23 2025	292	Microsoft-Windows-Hyper-V-VmSwitch	4	0	RSC offload modified for Port 790E58B4-7939-4434-9358-89AE7DDBE87E (Friendly Name: WSL (Hyper-V firewall)) Previous: 0, Current: 1. Reason: 0
+Sun Apr  6 03:36:21 2025	15	Microsoft-Windows-Kernel-General	4	10	
+Sun Apr  6 03:36:21 2025	15	Microsoft-Windows-Kernel-General	4	10	
 Sun Apr  6 01:20:27 2025	16	Microsoft-Windows-Kernel-General	4	0	
 Sun Apr  6 00:35:16 2025	566	Microsoft-Windows-Kernel-Power	4	268	
 Sun Apr  6 00:35:16 2025	507	Microsoft-Windows-Kernel-Power	4	158	
@@ -157,58 +212,3 @@ Sat Apr  5 12:21:12 2025	172	Microsoft-Windows-Kernel-Power	4	203
 Sat Apr  5 12:21:04 2025	566	Microsoft-Windows-Kernel-Power	4	268	
 Sat Apr  5 12:21:03 2025	506	Microsoft-Windows-Kernel-Power	4	157	
 Sat Apr  5 12:21:03 2025	566	Microsoft-Windows-Kernel-Power	4	268	
-Sat Apr  5 12:21:03 2025	700	Win32k	2	0	Power Manager has requested suppression of all input (INPUT_SUPPRESS_REQUEST=1)
-Sat Apr  5 12:21:03 2025	700	Win32k	2	0	Power Manager has requested suppression of all input (INPUT_SUPPRESS_REQUEST=1)
-Sat Apr  5 12:04:38 2025	16	Microsoft-Windows-Kernel-General	4	0	
-Sat Apr  5 12:00:00 2025	6013	EventLog	4	0	The system uptime is 7955 seconds.
-Sat Apr  5 11:36:40 2025	16	Microsoft-Windows-Kernel-General	4	0	
-Sat Apr  5 11:36:40 2025	16	Microsoft-Windows-Kernel-General	4	0	
-Sat Apr  5 11:36:12 2025	7040	Service Control Manager	4	0	The start type of the Background Intelligent Transfer Service service was changed from auto start to demand start.
-Sat Apr  5 11:35:32 2025	566	Microsoft-Windows-Kernel-Power	4	268	
-Sat Apr  5 11:35:32 2025	507	Microsoft-Windows-Kernel-Power	4	158	
-Sat Apr  5 11:35:30 2025	172	Microsoft-Windows-Kernel-Power	4	203	
-Sat Apr  5 11:34:35 2025	172	Microsoft-Windows-Kernel-Power	4	203	
-Sat Apr  5 11:34:27 2025	566	Microsoft-Windows-Kernel-Power	4	268	
-Sat Apr  5 11:34:09 2025	16	Microsoft-Windows-Kernel-General	4	0	
-Sat Apr  5 11:34:08 2025	506	Microsoft-Windows-Kernel-Power	4	157	
-Sat Apr  5 11:34:08 2025	566	Microsoft-Windows-Kernel-Power	4	268	
-Sat Apr  5 11:34:06 2025	16	Microsoft-Windows-Kernel-General	4	0	
-Sat Apr  5 11:32:44 2025	16	Microsoft-Windows-Kernel-General	4	0	
-Sat Apr  5 11:26:52 2025	7040	Service Control Manager	4	0	The start type of the Background Intelligent Transfer Service service was changed from demand start to auto start.
-Sat Apr  5 11:02:44 2025	16	Microsoft-Windows-Kernel-General	4	0	
-Sat Apr  5 10:58:26 2025	158	Microsoft-Windows-Time-Service	4	0	The time provider 'VMICTimeProvider' has indicated that the current hardware and operating environment is not supported and has stopped. This behavior is expected for VMICTimeProvider on non-HyperV-guest environments. This may be the expected behavior for the current provider in the current operating environment as well.
-Sat Apr  5 10:52:28 2025	7040	Service Control Manager	4	0	The start type of the Background Intelligent Transfer Service service was changed from auto start to demand start.
-Sat Apr  5 10:50:51 2025	15	Microsoft-Windows-Kernel-General	4	10	
-Sat Apr  5 10:50:41 2025	16	Microsoft-Windows-Kernel-General	4	0	
-Sat Apr  5 10:48:40 2025	16	Microsoft-Windows-Kernel-General	4	0	
-Sat Apr  5 10:48:05 2025	17	TPM	4	0	The Trusted Platform Module (TPM) hardware failed to execute a TPM command.
-Sat Apr  5 10:48:05 2025	17	TPM	4	0	The Trusted Platform Module (TPM) hardware failed to execute a TPM command.
-Sat Apr  5 10:48:05 2025	17	TPM	4	0	The Trusted Platform Module (TPM) hardware failed to execute a TPM command.
-Sat Apr  5 10:48:04 2025	5	Microsoft-Windows-IsolatedUserMode	4	0	Secure Trustlet NULL Id 0 and Pid 0 started with status 0.
-Sat Apr  5 10:48:04 2025	2	Microsoft-Windows-IsolatedUserMode	4	0	Secure Trustlet Id 0 and Pid 0 stopped with status 0.
-Sat Apr  5 10:47:44 2025	16	Microsoft-Windows-Kernel-General	4	0	
-Sat Apr  5 10:46:24 2025	7040	Service Control Manager	4	0	The start type of the Background Intelligent Transfer Service service was changed from demand start to auto start.
-Sat Apr  5 10:41:22 2025	158	Microsoft-Windows-Time-Service	4	0	The time provider 'VMICTimeProvider' has indicated that the current hardware and operating environment is not supported and has stopped. This behavior is expected for VMICTimeProvider on non-HyperV-guest environments. This may be the expected behavior for the current provider in the current operating environment as well.
-Sat Apr  5 10:24:18 2025	158	Microsoft-Windows-Time-Service	4	0	The time provider 'VMICTimeProvider' has indicated that the current hardware and operating environment is not supported and has stopped. This behavior is expected for VMICTimeProvider on non-HyperV-guest environments. This may be the expected behavior for the current provider in the current operating environment as well.
-Sat Apr  5 10:13:19 2025	7040	Service Control Manager	4	0	The start type of the Background Intelligent Transfer Service service was changed from auto start to demand start.
-Sat Apr  5 10:07:14 2025	158	Microsoft-Windows-Time-Service	4	0	The time provider 'VMICTimeProvider' has indicated that the current hardware and operating environment is not supported and has stopped. This behavior is expected for VMICTimeProvider on non-HyperV-guest environments. This may be the expected behavior for the current provider in the current operating environment as well.
-Sat Apr  5 09:58:33 2025	19	Microsoft-Windows-WindowsUpdateClient	4	1	Installation Successful: Windows successfully installed the following update: Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.427.75.0) - Current Channel (Broad)
-Sat Apr  5 09:58:24 2025	43	Microsoft-Windows-WindowsUpdateClient	4	1	Installation Started: Windows has started installing the following update: Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.427.75.0) - Current Channel (Broad)
-Sat Apr  5 09:58:17 2025	44	Microsoft-Windows-WindowsUpdateClient	4	1	Windows Update started downloading an update.
-Sat Apr  5 09:51:36 2025	19	Microsoft-Windows-WindowsUpdateClient	4	1	Installation Successful: Windows successfully installed the following update: 9WZDNCRFJBH4-Microsoft.Windows.Photos
-Sat Apr  5 09:51:36 2025	16	Microsoft-Windows-Kernel-General	4	0	
-Sat Apr  5 09:51:36 2025	43	Microsoft-Windows-WindowsUpdateClient	4	1	Installation Started: Windows has started installing the following update: 9WZDNCRFJBH4-Microsoft.Windows.Photos
-Sat Apr  5 09:51:34 2025	44	Microsoft-Windows-WindowsUpdateClient	4	1	Windows Update started downloading an update.
-Sat Apr  5 09:51:34 2025	44	Microsoft-Windows-WindowsUpdateClient	4	1	Windows Update started downloading an update.
-Sat Apr  5 09:51:34 2025	44	Microsoft-Windows-WindowsUpdateClient	4	1	Windows Update started downloading an update.
-Sat Apr  5 09:51:34 2025	44	Microsoft-Windows-WindowsUpdateClient	4	1	Windows Update started downloading an update.
-Sat Apr  5 09:51:19 2025	44	Microsoft-Windows-WindowsUpdateClient	4	1	Windows Update started downloading an update.
-Sat Apr  5 09:51:19 2025	44	Microsoft-Windows-WindowsUpdateClient	4	1	Windows Update started downloading an update.
-Sat Apr  5 09:51:19 2025	44	Microsoft-Windows-WindowsUpdateClient	4	1	Windows Update started downloading an update.
-Sat Apr  5 09:51:19 2025	44	Microsoft-Windows-WindowsUpdateClient	4	1	Windows Update started downloading an update.
-Sat Apr  5 09:51:14 2025	44	Microsoft-Windows-WindowsUpdateClient	4	1	Windows Update started downloading an update.
-Sat Apr  5 09:51:14 2025	44	Microsoft-Windows-WindowsUpdateClient	4	1	Windows Update started downloading an update.
-Sat Apr  5 09:51:14 2025	44	Microsoft-Windows-WindowsUpdateClient	4	1	Windows Update started downloading an update.
-Sat Apr  5 09:50:53 2025	10010	DCOM	1	0	<The description for Event ID ( 10010 ) in Source ( 'DCOM' ) could not be found. It contains the following insertion string(s):'{021E4F06-9DCC-49AD-88CF-ECC2DA314C8A}'.>
-Sat Apr  5 09:50:18 2025	10016	DCOM	2	0	<The description for Event ID ( 10016 ) in Source ( 'DCOM' ) could not be found. It contains the following insertion string(s):'application-specific, Local, Activation, {2593F8B9-4EAF-457C-B68A-50F6B8EA6B54}, {15C20B67-12E7-4BB6-92BB-7AFF07997402}, ZXEcoder, suraj, S-1-5-21-613975250-2061740886-1952526809-1001, LocalHost (Using LRPC), MicrosoftWindows.Client.WebExperience_525.5100.40.0_x64__cw5n1h2txyewy, Unavailable'.>
-Sat Apr  5 09:50:13 2025	17	TPM	4	0	The Trusted Platform Module (TPM) hardware failed to execute a TPM command.

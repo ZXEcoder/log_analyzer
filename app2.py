@@ -103,6 +103,71 @@ def anomaly_detection(
     if not high_mem.empty:
         alerts.append(f"High Memory (> {mem_thresh}%) at {len(high_mem)} timestamps")
     return "\n".join(alerts) or "No anomalies detected."
+@tool("seaborn_histogram_viz")
+def seaborn_histogram_viz(
+    df_path: str,
+    column: str,
+    bins: int,
+    title: str,
+    out_path: str
+) -> str:
+    """Generate a histogram of `column` from CSV at df_path."""
+    df = pd.read_csv(df_path, parse_dates=["timestamp"])
+    plt.figure(figsize=(8, 6))
+    sns.histplot(df[column].dropna(), bins=bins, kde=False)
+    plt.title(title)
+    plt.xlabel(column)
+    plt.ylabel("Count")
+    plt.savefig(out_path)
+    plt.close()
+    return out_path
+
+@tool("seaborn_bar_viz")
+def seaborn_bar_viz(
+    df_path: str,
+    x_col: str,
+    y_col: str,
+    top_n: int,
+    title: str,
+    out_path: str
+) -> str:
+    """Generate a bar chart of the top N categories in x_col by y_col sum."""
+    df = pd.read_csv(df_path, parse_dates=["timestamp"])
+    agg = df.groupby(x_col)[y_col].count().nlargest(top_n)
+    plt.figure(figsize=(10, 6))
+    sns.barplot(x=agg.values, y=agg.index, orient="h")
+    plt.title(title)
+    plt.xlabel("Count")
+    plt.ylabel(x_col)
+    plt.savefig(out_path)
+    plt.close()
+    return out_path
+
+@tool("seaborn_heatmap_viz")
+def seaborn_heatmap_viz(
+    df_path: str,
+    time_col: str,
+    category_col: str,
+    value_col: str,
+    title: str,
+    out_path: str
+) -> str:
+    """
+    Generate a heatmap of value_col aggregated by hour of day (from time_col) vs category_col.
+    e.g. errors per hour per service.
+    """
+    df = pd.read_csv(df_path, parse_dates=[time_col])
+    df["hour"] = df[time_col].dt.hour
+    pivot = df.pivot_table(index="hour", columns=category_col, values=value_col, aggfunc="count", fill_value=0)
+    plt.figure(figsize=(12, 6))
+    sns.heatmap(pivot, annot=True, fmt="d", cmap="Blues")
+    plt.title(title)
+    plt.xlabel(category_col)
+    plt.ylabel("Hour of Day")
+    plt.savefig(out_path)
+    plt.close()
+    return out_path
+
 
 
 
@@ -212,6 +277,22 @@ class PerformanceAnalysisCrew:
             verbose=True,
             llm=gemini_llm
         )
+    @agent
+    def viz_agent(self) -> Agent:
+        # register the new tools alongside seaborn_line_viz
+        return Agent(
+            role="Visualization Specialist",
+            goal="Generate informative Seaborn graphs for resource metrics and log trends.",
+            backstory="Turn raw metrics and log insights into clear and informative charts.",
+            memory=False,
+            tools=[seaborn_line_viz,
+                   seaborn_histogram_viz,
+                   seaborn_bar_viz,
+                   seaborn_heatmap_viz],
+            allow_delegation=False,
+            verbose=True,
+            llm=gemini_llm
+        )
 
     # — Tasks —
     @task
@@ -262,15 +343,18 @@ class PerformanceAnalysisCrew:
     def generate_viz_task(self) -> Task:
         return Task(
             description=(
-                "Produce Seaborn line charts in the './plots' directory based on the analyzed data:\n"
-                "1. Generate 'resource_usage.png' using the data from the CSV file located at the path provided by the collect_metrics_task. Set the x-axis to 'timestamp' and the y-axis to ['cpu_percent', 'mem_percent', 'disk_percent']. The title should be 'Resource Usage Over Time'. Save the output to './plots/resource_usage.png'.\n"
-                "2. Check if './logs/system_log_trends.csv' exists. If it does, load the data and generate 'system_log_trends.png'. Set the x-axis to 'timestamp' and the y-axis to 'value'. The title should be 'System Log Trends'. Save the output to './plots/system_log_trends.png'.\n"
-                "3. Check if './logs/app_log_trends.csv' exists. If it does, load the data and generate 'app_log_trends.png'. Set the x-axis to 'timestamp' and the y-axis to 'value'. The title should be 'Application Log Trends'. Save the output to './plots/app_log_trends.png'."
+                "Produce Seaborn charts in './plots':\n"
+                "1. 'resource_usage.png' from metrics CSV (cpu, mem, disk).\n"
+                "2. 'system_log_trends.png' if './logs/system_log_trends.csv' exists.\n"
+                "3. 'app_log_trends.png' if './logs/app_log_trends.csv' exists (timestamp vs value).\n"
+                "4. 'app_error_histogram.png': histogram of 'value' from app_log_trends.csv.\n"
+                "5. 'app_top_endpoints.png': bar chart of top 10 endpoints by call count from app_log_trends.csv (assuming an 'endpoint' column).\n"
+                "6. 'app_hourly_errors_heatmap.png': heatmap of error counts by hour vs endpoint from app_log_trends.csv."
             ),
             expected_output="List of paths to generated PNG plots.",
             agent=self.viz_agent(),
             context=[self.collect_metrics_task(), self.analyze_system_logs_task(), self.analyze_app_logs_task()],
-            tools=[seaborn_line_viz, FileReadTool()]
+            tools=[seaborn_line_viz, seaborn_histogram_viz, seaborn_bar_viz, seaborn_heatmap_viz, FileReadTool()]
         )
 
     @task
